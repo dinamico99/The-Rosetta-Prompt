@@ -6,3 +6,4 @@ This document describes the available documentation for optimizing prompts for A
 
 - **prompting.md**: Core prompting best practices from Anthropic's official documentation, including XML tag usage, role prompting, thinking patterns, and Claude-specific techniques.
 
+

@@ -46,3 +46,7 @@ dist/
 .coverage
 htmlcov/
 
+# Backups
+*.backup
+
+

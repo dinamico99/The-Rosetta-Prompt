@@ -6,3 +6,4 @@ This document describes the available documentation for optimizing prompts for G
 
 - **prompting.md**: Core prompting best practices from Google's official documentation, including multimodal handling, safety settings, and Gemini-specific techniques.
 
+

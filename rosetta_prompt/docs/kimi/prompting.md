@@ -1,98 +1,171 @@
-Best Practices for Prompts
-Best Practices for System Prompts: A system prompt refers to the initial input or instruction that a model receives before generating text or responding. This prompt is crucial for the model's operation link.
+# Kimi (Moonshot) Prompting Guide
+Last updated: January 2025
 
-Write Clear Instructions
-Why is it necessary to provide clear instructions to the model?
-The model can't read your mind. If the output is too long, you can ask the model to respond briefly. If the output is too simple, you can request expert-level writing. If you don't like the format of the output, show the model the format you'd like to see. The less the model has to guess about your needs, the more likely you are to get satisfactory results.
+## Overview
 
-Including More Details in Your Request Can Yield More Relevant Responses
-To obtain highly relevant output, ensure that your input request includes all important details and context.
+Kimi is an AI assistant developed by Moonshot AI, designed to be proficient in both Chinese and English conversations. The prompting approach emphasizes clarity, structure, and explicit guidance to help the model understand exactly what you need. Kimi excels when given detailed context and clear instructions.
 
-General Request	Better Request
-How to add numbers in Excel?	How do I sum a row of numbers in an Excel table? I want to automatically sum each row in the entire table and place all the totals in the rightmost column named "Total."
-Work report summary	Summarize my work records from 2023 in a paragraph of no more than 500 words. List the highlights of each month in sequence and provide a summary of the entire year.
-Requesting the Model to Assume a Role Can Yield More Accurate Output
-Add a specified role for the model to use in its response in the 'messages' field of the API request.
+## Key Principles
 
+1. **Write Clear Instructions**: The model cannot read your mind. Be explicit about what you want—specify length, format, style, and level of detail. The less guessing required, the better the results.
+
+2. **Include All Relevant Details**: Provide comprehensive context and requirements in your request. Vague prompts lead to vague outputs.
+
+3. **Use Delimiters**: Clearly separate different parts of your input using triple quotes, XML tags, or section headings to help the model understand the structure.
+
+4. **Define Steps Explicitly**: For complex tasks, outline the exact steps the model should follow.
+
+5. **Provide Examples**: Few-shot prompting with examples is more effective than lengthy explanations, especially for style or format replication.
+
+## Techniques
+
+### Role Assignment
+Assign a specific role to get more accurate, contextually appropriate outputs:
+
+```json
 {
   "messages": [
-    {"role": "system", "content": "You are Kimi, an artificial intelligence assistant provided by Moonshot AI. You are more proficient in Chinese and English conversations. You provide users with safe, helpful, and accurate answers. At the same time, you will refuse to answer any questions involving terrorism, racism, or explicit violence. Moonshot AI is a proper noun and should not be translated into other languages."},
+    {"role": "system", "content": "You are Kimi, an artificial intelligence assistant provided by Moonshot AI. You are proficient in Chinese and English conversations. You provide users with safe, helpful, and accurate answers."},
     {"role": "user", "content": "Hello, my name is Li Lei. What is 1+1?"}
   ]
 }
+```
 
-Using Delimiters in Your Request to Clearly Distinguish Different Parts of the Input
-For example, using triple quotes/XML tags/section headings as delimiters can help distinguish text parts that require different processing.
+### Using Delimiters
+Separate different content sections using XML tags, triple quotes, or clear headings:
 
+**XML Tags Example:**
+```json
 {
   "messages": [
-    {"role": "system", "content": "You will receive two articles of the same category, separated by XML tags. First, summarize the arguments of each article, then point out which article presents a better argument and explain why."},
+    {"role": "system", "content": "You will receive two articles separated by XML tags. First, summarize the arguments of each article, then point out which presents a better argument and explain why."},
     {"role": "user", "content": "<article>Insert article here</article><article>Insert article here</article>"}
   ]
 }
+```
 
+**Section Headings Example:**
+```json
 {
   "messages": [
-    {"role": "system", "content": "You will receive an abstract and the title of a paper. The title should give readers a clear idea of the paper's topic and also be eye-catching. If the title you receive does not meet these standards, please suggest five alternative options."},
+    {"role": "system", "content": "You will receive an abstract and the title of a paper. If the title does not clearly convey the topic and is not eye-catching, suggest five alternative options."},
     {"role": "user", "content": "Abstract: Insert abstract here.\n\nTitle: Insert title here"}
   ]
 }
+```
 
-Clearly Define the Steps Needed to Complete the Task
-It is advisable to outline a series of steps for the task. Writing these steps explicitly makes it easier for the model to follow and produces better output.
+### Step-by-Step Instructions
+Define explicit steps for multi-part tasks:
 
+```json
 {
   "messages": [
-    {"role": "system", "content": "Respond to user input using the following steps.\nStep one: The user will provide text enclosed in triple quotes. Summarize this text into one sentence with the prefix “Summary: ”.\nStep two: Translate the summary from step one into English and add the prefix "Translation: "."},
+    {"role": "system", "content": "Respond to user input using the following steps.\nStep one: The user will provide text enclosed in triple quotes. Summarize this text into one sentence with the prefix \"Summary: \".\nStep two: Translate the summary from step one into English and add the prefix \"Translation: \"."},
     {"role": "user", "content": "\"\"\"Insert text here\"\"\""}
   ]
 }
+```
 
-Provide Examples of Desired Output to the Model
-Providing examples of general guidance is usually more efficient for the model's output than showing all permutations of the task. For instance, if you intend to have the model replicate a style that is difficult to describe explicitly in response to user queries, this is known as a "few-shot" prompt.
+### Few-Shot Prompting
+Provide examples to demonstrate the desired output style or format:
 
+```json
 {
   "messages": [
     {"role": "system", "content": "Respond in a consistent style"},
     {"role": "user", "content": "Insert text here"}
   ]
 }
+```
 
-Specify the Desired Length of the Model's Output
-You can request the model to generate output of a specific target length. The target output length can be specified in terms of words, sentences, paragraphs, bullet points, etc. However, note that instructing the model to generate a specific number of words is not highly precise. The model is better at generating output of a specific number of paragraphs or bullet points.
+### Specifying Output Length
+Request specific lengths using paragraphs or bullet points (more reliable than word counts):
 
+```json
 {
   "messages": [
     {"role": "user", "content": "Summarize the text within the triple quotes in two sentences, within 50 words. \"\"\"Insert text here\"\"\""}
   ]
 }
+```
 
-Provide Reference Text
-Guide the Model to Use Reference Text to Answer Questions
-If you can provide a model with credible information related to the current query, you can guide the model to use the provided information to answer the question.
+### Using Reference Text
+Guide the model to use provided information for accurate answers:
 
+```json
 {
   "messages": [
-    {"role": "system", "content": "Answer the question using the provided article (enclosed in triple quotes). If the answer is not found in the article, write "I can't find the answer." "},
+    {"role": "system", "content": "Answer the question using the provided article (enclosed in triple quotes). If the answer is not found in the article, write \"I can't find the answer.\""},
     {"role": "user", "content": "<Insert article, each article enclosed in triple quotes>"}
   ]
 }
+```
 
-Break Down Complex Tasks
-Categorize to Identify Instructions Relevant to User Queries
-For tasks that require a large set of independent instructions to handle different scenarios, categorizing the query type and using this categorization to clarify which instructions are needed may aid the output.
+## Examples
 
-# Based on the classification of the customer query, a set of more specific instructions can be provided to the model to help it handle subsequent steps. For example, assume the customer needs help with "troubleshooting."
+### Example 1: Detailed Request vs. General Request
+
+**Less Effective:**
+```
+How to add numbers in Excel?
+```
+
+**More Effective:**
+```
+How do I sum a row of numbers in an Excel table? I want to automatically sum each row in the entire table and place all the totals in the rightmost column named "Total."
+```
+
+### Example 2: Work Summary with Constraints
+
+**Less Effective:**
+```
+Work report summary
+```
+
+**More Effective:**
+```
+Summarize my work records from 2023 in a paragraph of no more than 500 words. List the highlights of each month in sequence and provide a summary of the entire year.
+```
+
+### Example 3: Customer Service with Categorization
+
+```json
 {
   "messages": [
-    {"role": "system", "content": "You will receive a customer service inquiry that requires technical support. You can assist the user in the following ways:\n\n-Ask them to check if *** is configured.\nIf all *** are configured but the problem persists, ask for the device model they are using\n-Now you need to tell them how to restart the device:\n=If the device model is A, perform ***.\n-If the device model is B, suggest they perform ***."}
+    {"role": "system", "content": "You will receive a customer service inquiry that requires technical support. You can assist the user in the following ways:\n\n- Ask them to check if the configuration is correct.\n- If all settings are configured but the problem persists, ask for the device model they are using.\n- Now you need to tell them how to restart the device:\n  - If the device model is A, perform [specific steps].\n  - If the device model is B, suggest they perform [specific steps]."}
   ]
 }
+```
 
-For Long-Running Dialog Applications, Summarize or Filter Previous Conversations
-Since the model has a fixed context length, the conversation between the user and the model assistant cannot continue indefinitely.
+## Tips
 
-One solution to this issue is to summarize the first few rounds of the conversation. Once the input size reaches a predetermined threshold, a query is triggered to summarize the previous part of the conversation, and the summary of the previous conversation can also be included as part of the system message. Alternatively, previous conversations throughout the entire chat process can be summarized asynchronously.
+### Breaking Down Complex Tasks
 
-Chunk and Recursively Build a Complete Summary for Long Documents
-To summarize the content of a book, we can use a series of queries to summarize each chapter of the document. Partial summaries can be aggregated and summarized to produce a summary of summaries. This process can be recursively repeated until the entire book is summarized. If understanding later parts requires reference to earlier chapters, then when summarizing a specific point in the book, include summaries of the chapters preceding that point.
+**Categorize Queries**: For tasks requiring different instructions based on scenarios, first classify the query type, then apply the appropriate instructions.
+
+**Summarize Long Conversations**: Since models have fixed context lengths:
+- Summarize earlier conversation rounds when reaching context limits
+- Include conversation summaries as part of the system message
+- Summarize asynchronously throughout the chat process
+
+**Handle Long Documents**: For lengthy content like books:
+- Summarize each section/chapter individually
+- Aggregate partial summaries into a summary of summaries
+- Recursively repeat until the entire document is summarized
+- Include summaries of earlier sections when later parts depend on them
+
+### Best Practices
+
+1. **Be Specific About Format**: If you want JSON, tables, or bullet points, say so explicitly
+2. **Provide Context**: Don't assume the model knows your specific situation
+3. **Use Consistent Structure**: Maintain the same format pattern throughout your prompts
+4. **Test and Iterate**: If results aren't satisfactory, refine your instructions
+5. **Leverage System Messages**: Use the system role for persistent instructions and persona definitions
+
+### Common Pitfalls to Avoid
+
+- ❌ Asking for exact word counts (paragraphs/bullet points are more reliable)
+- ❌ Providing vague or ambiguous instructions
+- ❌ Omitting important context or constraints
+- ❌ Mixing different formatting styles in the same prompt
+- ❌ Expecting the model to infer unstated requirements

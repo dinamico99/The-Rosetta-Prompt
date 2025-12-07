@@ -6,3 +6,4 @@ This document describes the available documentation for optimizing prompts for K
 
 - **prompting.md**: Core prompting best practices for Kimi, including Chinese language optimization, long context handling, and Kimi-specific techniques.
 
+
